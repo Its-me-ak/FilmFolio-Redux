@@ -1,0 +1,11 @@
+// src/features/movie/thunks/fetchGenreThunk.js
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+const API_KEY = 'YOUR_API_KEY';
+const BASE_URL = 'https://api.themoviedb.org/3';
+
+export const fetchGenre = createAsyncThunk('movie/fetchGenre', async () => {
+    const response = await axios.get(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
+    return response.data.genres;
+});
