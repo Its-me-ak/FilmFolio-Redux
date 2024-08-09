@@ -22,6 +22,7 @@ const MovieDetail = () => {
     }, [dispatch, id]);
 
     const filteredCasts = casts.filter(cast => cast.profile_path);
+    
     const filteredCrews = crews.filter(crew => crew.profile_path);
 
     // Get video resolution based on video size
@@ -136,7 +137,7 @@ const MovieDetail = () => {
                     {
                         filteredCasts.map((cast) => (
                             <div key={cast.id} className="border-none px-1 outline-none">
-                                <img src={`https://image.tmdb.org/t/p/original${cast.profile_path}`} alt={cast.profile_path} className="h-[266px] rounded-lg shadow-xl" />
+                                <img src={`https://image.tmdb.org/t/p/original${cast.profile_path}`} alt={cast.name} className="h-[300px] rounded-lg shadow-xl" onClick={() => navigate(`/person-details/${cast.id}`)} />
                                 <h5 className="font-semibold text-gray-100 capitalize mt-1">{cast.name}</h5>
                                 <p className="text-sm text-[#38ccd4] font-semibold">{cast.character}</p>
                             </div>
@@ -145,13 +146,13 @@ const MovieDetail = () => {
                 </MovieSlider>
             </div>
 
-            <div className="py-4 px-3">
+            <div className="mt-985 py-4 px-3">
                 <h2 className="font-bold text-2xl uppercase text-gray-300 mb-3 md:text-left text-center">crew members</h2>
                 <MovieSlider>
                     {
                         filteredCrews.map((crew) => (
                             <div key={crew.id} className="border-none px-1 outline-none">
-                                <img src={`https://image.tmdb.org/t/p/original${crew.profile_path}`} alt={crew.profile_path} className="h-[266px] rounded-lg shadow-xl" />
+                                <img src={`https://image.tmdb.org/t/p/original${crew.profile_path}`} alt={crew.profile_path} className="h-[300px] rounded-lg shadow-xl" />
                                 <h5 className="font-semibold text-gray-100 capitalize mt-1">{crew.name}</h5>
                                 <p className="text-sm text-[#38ccd4] font-semibold">{crew.job}</p>
                             </div>

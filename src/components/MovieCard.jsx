@@ -4,7 +4,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-
 const MovieCard = ({ movie }) => {
   const { user } = useAuth0()
   const [isMovieBookmarked, setIsMovieBookmarked] = useState(null)
@@ -74,9 +73,9 @@ const MovieCard = ({ movie }) => {
           <h3 className="text-lg font-semibold">{movie.title}</h3>
         </div>
       </div>
-      {/* </Link> */}
     </>
   )
 }
+
 
 export default MovieCard

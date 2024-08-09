@@ -1,4 +1,3 @@
-import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,8 +9,8 @@ function MovieSlider(props) {
         arrows:false,
         infinite: true,
         speed: 500,
-        slidesToShow: 6,
-        slidesToScroll: 6,
+        slidesToShow: 5,
+        slidesToScroll: 5,
         initialSlide: 0,
         responsive: [
             {
@@ -42,7 +41,7 @@ function MovieSlider(props) {
         ]
     };
     return (
-        <div className="slider-container">
+        <div className="slider-container h-[340px]">
             <Slider {...settings}>
                 {props?.children}
             </Slider>

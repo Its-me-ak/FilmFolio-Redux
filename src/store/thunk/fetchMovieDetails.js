@@ -18,7 +18,6 @@ export const fetchCastAndCrew = createAsyncThunk(
     async (id) => {
         const response = await axios.get(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`);
         console.log(response.data);
-        
         return response.data;
     }
 );

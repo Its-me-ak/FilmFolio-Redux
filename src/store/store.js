@@ -9,6 +9,7 @@ import bollywoodMovieReducer from './slices/bollywoodMovieSlice'
 import animeMovieReducer from './slices/animeMovieSlice'
 import upcomingMovieReducer from './slices/upcomingMovieSlice'
 import movieDetailsReducer from './slices/movieDetailsSlice'
+import personDetailsReducer from './slices/personDetailsSlice'
 
 
 export const store = configureStore({
@@ -22,6 +23,7 @@ export const store = configureStore({
         bollywoodMovie: bollywoodMovieReducer,
         animeMovie: animeMovieReducer,
         upcomingMovie: upcomingMovieReducer,
-        movieDetails: movieDetailsReducer
+        movieDetails: movieDetailsReducer,
+        personDetails: personDetailsReducer
     },
 });

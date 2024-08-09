@@ -16,16 +16,18 @@ import MovieWrapper from './pages/MovieWrapper';
 import Header from './components/Header';
 import { Toaster } from 'react-hot-toast';
 import MyCollection from './components/MyCollection';
+import PersonDetails from './components/PersonDetails';
 
 const App = () => {
   const isMovieDetail = useMatch('/movie-details/:id');
+  const isPersonDetails = useMatch('/person-details/:id');
   return (
     <MovieProvider>
       <Toaster/>
       <SideNavbar />
       <div className='md:ml-[13rem] relative'>
         {
-          !isMovieDetail && (
+          !isMovieDetail && !isPersonDetails && (
             <div className='flex justify-between px-6 pt-2'>
               <Header />
               <SearchBar />
@@ -43,6 +45,7 @@ const App = () => {
           <Route path='/search/:query' element={<MovieWrapper />} />
           <Route path='/search' element={<MovieWrapper />} />
           <Route path='/movie-details/:id' element={<MovieDetail />} />
+          <Route path='/person-details/:id' element= {<PersonDetails/>} />
           <Route path='/bookmarked-movie' element={<MyCollection/>} />
         </Routes>
       </div>
