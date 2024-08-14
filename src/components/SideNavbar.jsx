@@ -18,6 +18,8 @@ const SideNavbar = () => {
     { id: 6, name: "Bollywood", headerName: "Bollywood Movies", link: "/bollywood" },
     { id: 7, name: "Anime", headerName: "Anime", link: "/anime" },
     { id: 8, name: "Upcoming", headerName: "Upcoming Movies", link: "/upcoming" },
+    { id: 9, name: "TV Shows", headerName: "TV Shows", link: "/tv-show" },
+
   ]
 
   const { header, setHeader, mobileMenu, setMobileMenu } = useContext(MovieContext)

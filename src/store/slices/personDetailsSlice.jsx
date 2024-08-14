@@ -6,6 +6,7 @@ const initialState = {
     personMovieCredits: [],
     personSocialLinks: [],
     loading: false,
+    creditLoading: false,
     error: null
 }
 
@@ -29,14 +30,14 @@ const personDetialsSlice = createSlice({
             })
             // Fetch Person Movie Credits
             .addCase(fetchPersonMovieCredits.pending, (state) => {
-                state.loading = true;
+                state.creditLoading = true;
             })
             .addCase(fetchPersonMovieCredits.fulfilled, (state, action) => {
                 state.personMovieCredits = action.payload;
-                state.loading = false;
+                state.creditLoading = false;
             })
             .addCase(fetchPersonMovieCredits.rejected, (state, action) => {
-                state.loading = false;
+                state.creditLoading = false;
                 state.error = action.error.message;
             })
             // Fetch Person Social Id's

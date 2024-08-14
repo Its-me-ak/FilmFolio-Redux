@@ -6,20 +6,27 @@ import { TiArrowBack } from "react-icons/ti";
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovieDetails, fetchCastAndCrew, fetchMovieVideos } from "../store/thunk/fetchMovieDetails";
+import { fetchTvShowDetails, fetchTvShowCastAndCrew, fetchTvShowVideos } from "../store/thunk/fetchTvShowDetails";
 import { setCurrentVideo } from "../store/slices/movieDetailsSlice";
 
 
-const MovieDetail = () => {
+const MovieDetail = ({type}) => {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { movieDetails, casts, crews, videos, currentVideo, loading } = useSelector(state => state.movieDetails);
 
     useEffect(() => {
-        dispatch(fetchMovieDetails(id));
-        dispatch(fetchCastAndCrew(id));
-        dispatch(fetchMovieVideos(id));
-    }, [dispatch, id]);
+        if (type === "movie") {
+            dispatch(fetchMovieDetails(id));
+            dispatch(fetchCastAndCrew(id));
+            dispatch(fetchMovieVideos(id));
+        } else if (type === "tv") {
+            dispatch(fetchTvShowDetails(id));
+            dispatch(fetchTvShowCastAndCrew(id));
+            dispatch(fetchTvShowVideos(id));
+        }
+    }, [dispatch, id, type]);
 
     const filteredCasts = casts.filter(cast => cast.profile_path);
     

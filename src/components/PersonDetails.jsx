@@ -9,8 +9,6 @@ import Loader from "./Loader";
 
 const calculateAge = (birthDate) => {
     const today = new Date();
-    console.log(today);
-
     const birthDateObj = new Date(birthDate);
     let age = today.getFullYear() - birthDateObj.getFullYear();
     const monthDifference = today.getMonth() - birthDateObj.getMonth();
@@ -25,7 +23,9 @@ const PersonDetails = () => {
     const navigate = useNavigate()
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { personDetails, personSocialLinks, personMovieCredits, loading } = useSelector(state => state.personDetails)
+    const { personDetails, personSocialLinks, personMovieCredits, loading, creditLoading } = useSelector(state => state.personDetails)
+    console.log(creditLoading);
+
 
     useEffect(() => {
         dispatch(fetchPersonDetails(id));
@@ -81,7 +81,7 @@ const PersonDetails = () => {
                         <div className="mb-3">
                             <p className="text-lg text-gray-300 font-semibold">Known For</p>
                             <span className="text-gray-400 text-[15px]">{personDetails.known_for_department}</span>
-                        </div> 
+                        </div>
                         <div className="mb-3">
                             <p className="text-lg text-gray-300 font-semibold">Gender</p>
                             <span className="text-gray-400 text-[15px]">{personDetails.gender === 2 ? "Male" : "Female"}</span>
@@ -129,48 +129,61 @@ const PersonDetails = () => {
 
                         <div className="pt-5">
                             <h2 className="font-bold text-lg capitalize text-gray-300 mb-3 md:text-left text-center">known for</h2>
-                            {personMovieCredits.cast && personMovieCredits.cast.length > 0 ? (
-                                <MovieSlider>
-                                    {personMovieCredits.cast.map((c) => (
-                                        <div key={c.id} className="border-none px-1 outline-none">
-                                            <img src={`https://image.tmdb.org/t/p/original${c.poster_path}`} alt={c.name} className="h-[266px] cursor-pointer rounded-lg shadow-xl" onClick={() => navigate(`/movie-details/${c.id}`)} />
-                                            <h5 className="text-sm font-semibold text-gray-100 capitalize mt-1">{c.title}</h5>
-                                        </div>
-                                    ))}
-                                </MovieSlider>
+                            {creditLoading ? (
+                                <Loader />
                             ) : (
-                                <p>No credits available</p>
+                                personMovieCredits.cast && personMovieCredits.cast.length > 0 && (
+                                    <MovieSlider>
+                                        {personMovieCredits.cast.map((c) => (
+                                            <div key={c.id} className="border-none px-1 outline-none">
+                                                <img
+                                                    src={`https://image.tmdb.org/t/p/original${c.poster_path}`}
+                                                    alt={c.name}
+                                                    className="h-[266px] cursor-pointer rounded-lg shadow-xl"
+                                                    onClick={() => navigate(`/movie-details/${c.id}`)}
+                                                />
+                                                <h5 className="text-sm font-semibold text-gray-100 capitalize mt-1">{c.title}</h5>
+                                            </div>
+                                        ))}
+                                    </MovieSlider>
+                                )
                             )}
                         </div>
 
                         <div>
                             <h2 className="font-bold text-lg capitalize text-gray-300 mb-3 md:text-left text-center">Acting Credits</h2>
-                            {personMovieCredits && personMovieCredits.cast && (
-                                <ul>
-                                    {personMovieCredits.cast
-                                        .filter(credit => credit.release_date) // Filter out items without a release date
-                                        .sort((a, b) => new Date(b.release_date) - new Date(a.release_date)) // Sort by release_date in descending order
-                                        .map((credit, index, array) => {
-                                            const currentYear = new Date(credit.release_date).getFullYear();
-                                            const previousYear = index > 0 ? new Date(array[index - 1].release_date).getFullYear() : null;
-                                            const isYearChanged = previousYear && currentYear !== previousYear;
+                            {creditLoading ? (
+                                <Loader />
+                            )
+                                : (
+                                    personMovieCredits && personMovieCredits.cast && (
+                                        <ul>
+                                            {personMovieCredits.cast
+                                                .filter(credit => credit.release_date)
+                                                .sort((a, b) => new Date(b.release_date) - new Date(a.release_date)) // Sort by release_date in descending order
+                                                .map((credit, index, array) => {
+                                                    const currentYear = new Date(credit.release_date).getFullYear();
+                                                    const nextYear = index < array.length - 1 ? new Date(array[index + 1].release_date).getFullYear() : null;
+                                                    const isYearChanged = nextYear && currentYear !== nextYear;
 
-                                            return (
-                                                <li
-                                                    key={credit.credit_id}
-                                                    style={{
-                                                        borderBottom: isYearChanged ? '1px solid #9ca3afb3' : 'none',
-                                                        paddingBottom: isYearChanged ? '10px' : '0',
-                                                        marginBottom: isYearChanged ? '10px' : '0',
-                                                    }}
-                                                >
-                                                    <span className="font-semibold text-gray-300">{currentYear}</span> <span className="w-3 h-[2px] bg-gray-400 inline-block mx-3 mb-1"></span> <span className="text-gray-300 font-bold">{credit.title}</span>  
-                                                    <p className="text-gray-400 text-sm ml-[90px] mb-2">{credit.character && ` as ${credit.character}`}</p>
-                                                </li>
-                                            );
-                                        })}
-                                </ul>
-                            )}
+                                                    return (
+                                                        <li
+                                                            key={credit.credit_id}
+                                                            style={{
+                                                                borderBottom: isYearChanged ? '1px solid #9ca3afb3' : 'none',
+                                                                paddingBottom: isYearChanged ? '10px' : '0',
+                                                                marginBottom: isYearChanged ? '10px' : '0',
+                                                            }}
+                                                        >
+                                                            <span className="font-semibold text-gray-300">{currentYear}</span> <span className="w-3 h-[2px] bg-gray-400 inline-block mx-3 mb-1"></span> <span className="text-gray-300 font-bold">{credit.title}</span>
+                                                            <p className="text-gray-400 text-sm ml-[90px] mb-2">{credit.character && ` as ${credit.character}`}</p>
+                                                        </li>
+                                                    );
+                                                })}
+                                        </ul>
+                                    )
+                                )
+                            }
                         </div>
                     </div>
                 </div>

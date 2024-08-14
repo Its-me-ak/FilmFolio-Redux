@@ -14,12 +14,6 @@ const animeMovieSlice = createSlice({
     name: 'animeMovie',
     initialState,
     reducers: {
-        setMovies: (state, action) => {
-            state.animeMovies = action.payload;
-        },
-        setTotalPage: (state, action) => {
-            state.totalPage = action.payload;
-        },
         setPage: (state, action) => {
             state.page = action.payload;
         },
@@ -45,5 +39,5 @@ const animeMovieSlice = createSlice({
     },
 });
 
-export const { setActiveGenre, setMovies, setTotalPage, setPage } = animeMovieSlice.actions;
+export const { setActiveGenre, setPage } = animeMovieSlice.actions;
 export default animeMovieSlice.reducer;

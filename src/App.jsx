@@ -11,23 +11,25 @@ import Anime from './components/Anime';
 import UpcomingMovie from './components/UpcomingMovie';
 import MovieDetail from './components/MovieDetail';
 import SearchBar from './components/SearchBar';
-// import styled from 'styled-components';
 import MovieWrapper from './pages/MovieWrapper';
 import Header from './components/Header';
 import { Toaster } from 'react-hot-toast';
 import MyCollection from './components/MyCollection';
 import PersonDetails from './components/PersonDetails';
+import TvShows from './components/TvShows';
 
 const App = () => {
   const isMovieDetail = useMatch('/movie-details/:id');
   const isPersonDetails = useMatch('/person-details/:id');
+  const isTvDetails = useMatch('/tv-details/:id');
+
   return (
     <MovieProvider>
       <Toaster/>
       <SideNavbar />
       <div className='md:ml-[13rem] relative'>
         {
-          !isMovieDetail && !isPersonDetails && (
+          !isMovieDetail && !isPersonDetails && !isTvDetails && (
             <div className='flex justify-between px-6 pt-2'>
               <Header />
               <SearchBar />
@@ -44,9 +46,11 @@ const App = () => {
           <Route path='/upcoming' element={<UpcomingMovie />} />
           <Route path='/search/:query' element={<MovieWrapper />} />
           <Route path='/search' element={<MovieWrapper />} />
-          <Route path='/movie-details/:id' element={<MovieDetail />} />
+          <Route path='/movie-details/:id' element={<MovieDetail type={'movie'} />} />
+          <Route path='/tv-details/:id' element={<MovieDetail type={'tv'} />} />
           <Route path='/person-details/:id' element= {<PersonDetails/>} />
           <Route path='/bookmarked-movie' element={<MyCollection/>} />
+          <Route path='/tv-show' element={<TvShows/>} />
         </Routes>
       </div>
     </MovieProvider>

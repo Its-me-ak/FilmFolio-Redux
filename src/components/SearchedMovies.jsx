@@ -29,13 +29,15 @@ const SearchedMovies = () => {
         }
     }, [dispatch, query, page]);
 
+    const filterSearchMovies = searchMovies.filter(searchMovie => searchMovie.poster_path)
+
 
     return (
         <>
             <div className="movies-container px-6 pb-10 pt-10">
                 {loading && page === 1 ? (<Loader />) : (
                     <InfiniteScroll
-                        dataLength={searchMovies.length} // This is important field to render the next data
+                        dataLength={filterSearchMovies.length} // This is important field to render the next data
                         next={fetchMoreData}
                         hasMore={page < totalPage}
                         loader={<Loader />}
@@ -43,8 +45,8 @@ const SearchedMovies = () => {
                         style={{ overflow: "visible" }}
                     >
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                            {searchMovies.map((searchMovie, index) => (
-                                <MovieCard key={index} movie={searchMovie} />
+                            {filterSearchMovies.map((searchMovie) => (
+                                <MovieCard key={searchMovie.id} movie={searchMovie} type={'movie'} />
                             ))}
                         </div>
                     </InfiniteScroll>

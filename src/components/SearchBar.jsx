@@ -8,7 +8,7 @@ import {
 import debounce from "lodash.debounce";
 import { useNavigate } from "react-router-dom";
 import { fetchSearchMovies } from "../store/thunk/fetchSearchMovies";
-import { setQuery, setPage } from "../store/slices/searchMovieSlice";
+import { setQuery, setPage, } from "../store/slices/searchMovieSlice";
 import { useDispatch } from "react-redux";
 
 function SearchBar() {
@@ -28,7 +28,7 @@ function SearchBar() {
         const query = targetRef.current.value;
         dispatch(setQuery(query));
         dispatch(setPage(1)); // Reset page to 1 on new search
-        dispatch(fetchSearchMovies({ query, page: 1 }));
+        dispatch(fetchSearchMovies({ query, page: 1, clearResult: true }));
 
         if (query.trim() !== "") {
             navigate(`/search/${encodeURIComponent(query)}`);

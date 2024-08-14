@@ -50,8 +50,8 @@ const BollywoodMovie = () => {
                             style={{ overflow: 'visible' }}
                         >
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                                {bollywoodMovies.map((movie, index) => (
-                                    <MovieCard key={index} movie={movie} />
+                                {bollywoodMovies.map((bollywood) => (
+                                    <MovieCard key={bollywood.id} movie={bollywood} type={'movie'} />
                                 ))}
                             </div>
                         </InfiniteScroll>

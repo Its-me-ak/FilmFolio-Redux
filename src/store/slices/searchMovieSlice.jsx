@@ -4,10 +4,11 @@ import { fetchSearchMovies } from '../thunk/fetchSearchMovies';
 
 const initialState = {
     searchMovies: [],
+    totalResult: 0,
     loading: false,
     error: null,
     page: 1,
-    totalPage: 1,
+    totalPage: 0,
     query: '',
 };
 
@@ -20,6 +21,12 @@ const searchedMoviesSlice = createSlice({
         },
         setQuery: (state, action) => {
             state.query = action.payload;
+        },
+        clearSearchResult(state) {
+            state.searchMovies = [];
+            state.totalResult = 0;
+            state.totalPage = 0;
+            state.page = 1;
         },
     },
     extraReducers: (builder) => {
@@ -40,5 +47,5 @@ const searchedMoviesSlice = createSlice({
     },
 });
 
-export const { setPage, setQuery } = searchedMoviesSlice.actions;
+export const { setPage, setQuery, clearSearchResult } = searchedMoviesSlice.actions;
 export default searchedMoviesSlice.reducer;

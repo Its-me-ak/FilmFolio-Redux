@@ -13,6 +13,7 @@ export const fetchMovieDetails = createAsyncThunk(
     }
 );
 
+
 export const fetchCastAndCrew = createAsyncThunk(
     'movie/fetchCastAndCrew',
     async (id) => {

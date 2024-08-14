@@ -10,6 +10,7 @@ import animeMovieReducer from './slices/animeMovieSlice'
 import upcomingMovieReducer from './slices/upcomingMovieSlice'
 import movieDetailsReducer from './slices/movieDetailsSlice'
 import personDetailsReducer from './slices/personDetailsSlice'
+import tvShowsReducer from './slices/tvShowsSlices'
 
 
 export const store = configureStore({
@@ -24,6 +25,7 @@ export const store = configureStore({
         animeMovie: animeMovieReducer,
         upcomingMovie: upcomingMovieReducer,
         movieDetails: movieDetailsReducer,
-        personDetails: personDetailsReducer
+        personDetails: personDetailsReducer,
+        tvShows: tvShowsReducer,
     },
 });

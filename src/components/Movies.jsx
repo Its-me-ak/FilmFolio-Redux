@@ -48,8 +48,8 @@ const Movies = () => {
                             style={{ overflow: 'visible' }}
                         >
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                                {movies.map((movie, index) => (
-                                    <MovieCard key={index} movie={movie} />
+                                {movies.map((movie) => (
+                                    <MovieCard key={movie.id} movie={movie} type={'movie'} />
                                 ))}
                             </div>
                         </InfiniteScroll>
