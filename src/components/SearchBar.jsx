@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState } from "react";
+import {useContext, useEffect, useRef, useState } from "react";
 import {
     Container,
     SearchInput,
@@ -10,8 +10,10 @@ import { useNavigate } from "react-router-dom";
 import { fetchSearchMovies } from "../store/thunk/fetchSearchMovies";
 import { setQuery, setPage, } from "../store/slices/searchMovieSlice";
 import { useDispatch } from "react-redux";
+import { MovieContext } from "../context/MovieContext";
 
 function SearchBar() {
+    const { setHeader } = useContext(MovieContext)
     const navigate = useNavigate()
     const  dispatch = useDispatch();
     const targetRef = useRef(null);
@@ -27,13 +29,15 @@ function SearchBar() {
     const debounceSearch = debounce(() => {
         const query = targetRef.current.value;
         dispatch(setQuery(query));
-        dispatch(setPage(1)); // Reset page to 1 on new search
+        dispatch(setPage(1));
         dispatch(fetchSearchMovies({ query, page: 1, clearResult: true }));
 
         if (query.trim() !== "") {
+            setHeader(`Search Results of "${query}"`)
             navigate(`/search/${encodeURIComponent(query)}`);
         } else {
-            navigate('/');
+            navigate('/')
+            setHeader("Genres")
         }
     }, 700); // Adjust the delay as needed
 

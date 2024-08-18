@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from "react"
 import { MovieContext } from "../context/MovieContext"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react";
 import toast from "react-hot-toast";
 import { CgClose } from "react-icons/cg";
@@ -9,6 +9,7 @@ import { CgClose } from "react-icons/cg";
 const SideNavbar = () => {
   const { isAuthenticated, loginWithPopup, logout, user } = useAuth0()
   const sidebarRef = useRef()
+  const navigate = useNavigate()
   const NavData = [
     { id: 1, name: "Genres", headerName: "Genres", link: "/" },
     { id: 2, name: "My Collection", headerName: "My Collection", link: "/bookmarked-movie" },
@@ -103,7 +104,12 @@ const SideNavbar = () => {
     return () => {
       document.removeEventListener('click', handleSidebar)
     }
-  }, [])
+  }, [setMobileMenu])
+
+  const handleLogoClick = () => {
+    navigate("/");
+    setHeader("Genres");
+  };
 
   return (
     <div ref={sidebarRef} className={`block md:fixed md:w-52 h-full bg-[#21263a] absolute w-52 z-30 md:translate-x-0 transition-all ${mobileMenu ? "translate-x-0" : "translate-x-[-240px]"}`}>
@@ -111,9 +117,9 @@ const SideNavbar = () => {
         <CgClose className="cursor-pointer" onClick={MobileMenuHide} />
       </span>
       <div className="logo">
-        <Link to="/" className="flex items-center justify-center w-full h-20 text-2xl">
-          <h3 className="text-3xl text-gray-100 font-bold">FilmFolio</h3>
-        </Link>
+        <span onClick={handleLogoClick} className="flex items-center justify-center w-full h-20 text-2xl">
+          <h3 className="text-3xl text-gray-100 font-bold cursor-pointer">FilmFolio</h3>
+        </span>
       </div>
       <nav className="navbar">
         <ul className="flex flex-col justify-between h-full">

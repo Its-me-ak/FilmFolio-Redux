@@ -9,6 +9,8 @@ export const fetchTvShowDetails = createAsyncThunk(
     'tvShows/fetchTvShowDetails',
     async (id) => {
         const response = await axios.get(`${BASE_URL}/tv/${id}?api_key=${API_KEY}&language=en-US`);
+        console.log(response.data);
+        
         return response.data;
     }
 );

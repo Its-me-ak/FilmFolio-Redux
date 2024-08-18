@@ -10,7 +10,7 @@ import { fetchTvShowDetails, fetchTvShowCastAndCrew, fetchTvShowVideos } from ".
 import { setCurrentVideo } from "../store/slices/movieDetailsSlice";
 
 
-const MovieDetail = ({type}) => {
+const MovieDetail = ({ type }) => {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -29,8 +29,11 @@ const MovieDetail = ({type}) => {
     }, [dispatch, id, type]);
 
     const filteredCasts = casts.filter(cast => cast.profile_path);
-    
     const filteredCrews = crews.filter(crew => crew.profile_path);
+
+    // get the details data that is differnce in tv show and movie
+    const movieTitle = movieDetails?.title || movieDetails?.name;
+    const movieReleaseYear = movieDetails?.release_date || movieDetails?.first_air_date
 
     // Get video resolution based on video size
     const getVideoResolution = (video) => {
@@ -57,16 +60,31 @@ const MovieDetail = ({type}) => {
                             <img src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`} className="h-full w-full object-cover" alt="" />
                             <div className="bg-black/[0.65] w-full h-full absolute top-0 left-0 z-10" ></div>
                             <div className="movie-content absolute top-0 left-0 z-20 lg:w-2/3 md:w-4/5 w-full md:pt-24 pt-16 md:px-5 px-3">
-                                <h1 className="font-bold text-gray-100 md:text-5xl text-4xl">{movieDetails.title}</h1>
+                                <h1 className="font-bold text-gray-100 md:text-5xl text-4xl">{movieTitle}</h1>
                                 <p className="text-gray-200 font-light pt-2 md:text-left text-justify">{movieDetails.overview}</p>
                                 <div className="flex flex-wrap md:justify-start justify-center gap-6 mt-4">
-                                    <li className="text-center list-none">
-                                        <h5 className="text-gray-200 font-semibold capitalize">movie length</h5>
-                                        <p className="text-[#38ccd4] font-medium text-[15px]">{movieDetails.runtime} minutes</p>
-                                    </li>
+                                    {
+                                        movieDetails.runtime ? (
+                                            <li className="text-center list-none">
+                                                <h5 className="text-gray-200 font-semibold capitalize">movie length</h5>
+                                                <p className="text-[#38ccd4] font-medium text-[15px]">
+                                                    {movieDetails.runtime} minutes
+                                                </p>
+                                            </li>
+                                        ) : (
+                                            movieDetails.last_air_date && (
+                                                <li className="text-center list-none">
+                                                    <h5 className="text-gray-200 font-semibold capitalize">Last Air Date</h5>
+                                                    <p className="text-[#38ccd4] font-medium text-[15px]">
+                                                        {movieDetails.last_air_date}
+                                                    </p>
+                                                </li>
+                                            )
+                                        )
+                                    }
                                     <li className="text-center list-none">
                                         <h5 className="text-gray-200 font-semibold capitalize">release date</h5>
-                                        <p className="text-[#38ccd4] font-medium text-[15px]">{movieDetails.release_date}</p>
+                                        <p className="text-[#38ccd4] font-medium text-[15px]">{movieReleaseYear}</p>
                                     </li>
                                     <li className="text-center list-none">
                                         <h5 className="text-gray-200 font-semibold capitalize">country</h5>
@@ -79,19 +97,49 @@ const MovieDetail = ({type}) => {
                                         <p className="text-[#38ccd4] font-medium text-[15px]">{movieDetails.vote_average.toFixed(1)}</p>
                                     </li>
 
-                                    <li className="text-center list-none">
-                                        <h5 className="text-gray-200 font-semibold capitalize">budget</h5>
-                                        <p className="text-[#38ccd4] font-medium text-[15px]">
-                                            {movieDetails.budget ? (movieDetails.budget / 1000000).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + ' million' : 'N/A'}
-                                        </p>
-                                    </li>
+                                    {
+                                        movieDetails.number_of_seasons ? (
+                                            <li className="text-center list-none">
+                                                <h5 className="text-gray-200 font-semibold capitalize">Seasons</h5>
+                                                <p className="text-[#38ccd4] font-medium text-[15px]">
+                                                    {movieDetails.number_of_seasons}
+                                                </p>
+                                            </li>
+                                        ) : ""
+                                    }
 
-                                    <li className="text-center list-none">
-                                        <h5 className="text-gray-200 font-semibold capitalize">revenue</h5>
-                                        <p className="text-[#38ccd4] font-medium text-[15px]">
-                                            {movieDetails.revenue ? (movieDetails.revenue / 1000000).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + ' million' : 'N/A'}
-                                        </p>
-                                    </li>
+                                    {
+                                        movieDetails.number_of_episodes ? (
+                                            <li className="text-center list-none">
+                                                <h5 className="text-gray-200 font-semibold capitalize">Episodes</h5>
+                                                <p className="text-[#38ccd4] font-medium text-[15px]">
+                                                    {movieDetails.number_of_episodes}
+                                                </p>
+                                            </li>
+                                        ) : ""
+                                    }
+
+                                    {
+                                        movieDetails.budget ? (
+                                            <li className="text-center list-none">
+                                                <h5 className="text-gray-200 font-semibold capitalize">budget</h5>
+                                                <p className="text-[#38ccd4] font-medium text-[15px]">
+                                                    {movieDetails.budget ? (movieDetails.budget / 1000000).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + ' million' : 'N/A'}
+                                                </p>
+                                            </li>
+                                        ) : ""
+                                    }
+
+                                    {
+                                        movieDetails.revenue ? (
+                                            <li className="text-center list-none">
+                                                <h5 className="text-gray-200 font-semibold capitalize">revenue</h5>
+                                                <p className="text-[#38ccd4] font-medium text-[15px]">
+                                                    {movieDetails.revenue ? (movieDetails.revenue / 1000000).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + ' million' : 'N/A'}
+                                                </p>
+                                            </li>
+                                        ) : ""
+                                    }
                                 </div>
 
                                 <div className="genres mt-7 flex flex-wrap gap-3">
