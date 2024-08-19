@@ -77,7 +77,7 @@ const SideNavbar = () => {
           },
         });
       } catch (error) {
-        toast.error('Login canceled', {
+        toast.error('Login cancelled', {
           style: {
             borderRadius: '10px',
             background: '#21263a',
