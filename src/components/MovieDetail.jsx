@@ -17,6 +17,10 @@ const MovieDetail = ({ type }) => {
     const { movieDetails, casts, crews, videos, currentVideo, loading } = useSelector(state => state.movieDetails);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         if (type === "movie") {
             dispatch(fetchMovieDetails(id));
             dispatch(fetchCastAndCrew(id));
