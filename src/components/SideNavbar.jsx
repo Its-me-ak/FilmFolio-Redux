@@ -62,26 +62,30 @@ const SideNavbar = () => {
   const handleLogin = async () => {
     try {
       await loginWithPopup();
-      // Check the authentication status after the popup closes
-      if (user) {
-        toast.success('Logged in successfully', {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        });
-      } else {
-        toast.error('Login canceled', {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        });
-      }
+
+      // Adding a short delay to allow isAuthenticated to update
+      setTimeout(() => {
+        if (isAuthenticated) {
+          toast.success('Logged in successfully', {
+            style: {
+              borderRadius: '10px',
+              background: '#21263a',
+              color: '#fff',
+            },
+          });
+        } else {
+          toast.error('Login canceled', {
+            style: {
+              borderRadius: '10px',
+              background: '#21263a',
+              color: '#fff',
+            },
+          });
+        }
+      }, 500); // Adjust the delay as needed
+
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error('Login failed', {
         style: {
           borderRadius: '10px',
