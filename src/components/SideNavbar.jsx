@@ -63,7 +63,7 @@ const SideNavbar = () => {
     try {
       await loginWithPopup();
       // Check the authentication status after the popup closes
-      if (isAuthenticated) {
+      if (user) {
         toast.success('Logged in successfully', {
           style: {
             borderRadius: '10px',
