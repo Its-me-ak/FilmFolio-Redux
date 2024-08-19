@@ -8,8 +8,8 @@ import { CgClose } from "react-icons/cg";
 
 const SideNavbar = () => {
   const { isAuthenticated, loginWithPopup, logout, user } = useAuth0()
-  console.log(isAuthenticated);
-  console.log(user);
+  console.log( "This is isAuthenticated",isAuthenticated);
+  console.log("This is user",user);
   
   
   const sidebarRef = useRef()
