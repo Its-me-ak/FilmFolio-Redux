@@ -62,23 +62,13 @@ const SideNavbar = () => {
   const handleLogin = async () => {
     try {
       await loginWithPopup();
-      if (isAuthenticated) {
-        toast.success('Logged in successfully', {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        });
-      } else {
-        toast.error('Login canceled', {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        });
-      }
+      toast.success('Logged in successfully', {
+        style: {
+          borderRadius: '10px',
+          background: '#21263a',
+          color: '#fff',
+        },
+      });
     } catch (error) {
       console.log(error);
       toast.error('Login failed', {
@@ -90,6 +80,7 @@ const SideNavbar = () => {
       });
     }
   };
+
 
   useEffect(() => {
     const handleSidebar = (e) => {

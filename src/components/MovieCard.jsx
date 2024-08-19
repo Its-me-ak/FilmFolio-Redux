@@ -27,8 +27,26 @@ const MovieCard = ({ movie, type }) => {
     } else {
       setIsMovieBookmarked(!isMovieBookmarked)
       if (isMovieBookmarked) {
+        toast.success("bookmarked movie removed",
+          {
+            style: {
+              borderRadius: '10px',
+              background: '#21263a',
+              color: '#fff',
+            },
+          }
+        )
         localStorage.removeItem(movie.id);
       } else {
+        toast.success("You bookmarked your favorite movie",
+          {
+            style: {
+              borderRadius: '10px',
+              background: '#21263a',
+              color: '#fff',
+            },
+          }
+        )
         localStorage.setItem(movie.id, JSON.stringify(movie));
       }
     }

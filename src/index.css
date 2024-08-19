@@ -6,3 +6,19 @@ body {
     width: 100%;
 background-image: linear-gradient(72.1deg, rgba(31, 30, 48, 1) 1.7%, rgba(58, 74, 110, 1) 99.1%);
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #2d2e2f;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #38ccd4;
+    border-radius: 10px;
+}
