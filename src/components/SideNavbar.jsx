@@ -50,7 +50,7 @@ const SideNavbar = () => {
            },
          }
        )
-     }, 700)
+     }, 1000)
 
     } catch (error) {
       toast.error('Logout failed',
@@ -69,24 +69,26 @@ const SideNavbar = () => {
     try {
       await loginWithPopup();
 
-      // Check if the user object is populated
-      if (user) {
-        toast.success('Logged in successfully', {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        });
-      } else {
-        toast.error('Login canceled', {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        });
-      }
+      // Wait for a short moment to ensure the isAuthenticated state is updated
+      setTimeout(() => {
+        if (isAuthenticated) {
+          toast.success('Logged in successfully', {
+            style: {
+              borderRadius: '10px',
+              background: '#21263a',
+              color: '#fff',
+            },
+          });
+        } else {
+          toast.error('Login canceled', {
+            style: {
+              borderRadius: '10px',
+              background: '#21263a',
+              color: '#fff',
+            },
+          });
+        }
+      }, 1000); // Adjust the delay as necessary
     } catch (error) {
       console.error(error);
       toast.error('Login failed', {
