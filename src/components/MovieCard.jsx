@@ -45,8 +45,9 @@ const MovieCard = ({ movie, type }) => {
   const movieTitleOrName = movie.title || movie.name;
   const movieReleaseYear = movie.release_date || movie.first_air_date 
 
+  const itemType = movie.title ? 'movie' : 'tv';
   const handleNavigation = () => {
-    navigate(`/${type}-details/${movie.id}`);
+    navigate(`/${itemType}-details/${movie.id}`);
   };
 
   return (

@@ -5,9 +5,10 @@ import Movies from '../components/Movies'
 
 const MovieWrapper = () => {
     const {query} = useParams()
+
   return (
     <>
-        {query ? <SearchedMovies  query={query}/> : <Movies/>}
+      {query ? <SearchedMovies query={query}/> : <Movies/>}
 
     </>
   )

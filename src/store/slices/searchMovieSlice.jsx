@@ -10,6 +10,7 @@ const initialState = {
     page: 1,
     totalPage: 0,
     query: '',
+    type: ''
 };
 
 const searchedMoviesSlice = createSlice({

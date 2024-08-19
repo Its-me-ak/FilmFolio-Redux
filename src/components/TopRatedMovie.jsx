@@ -43,7 +43,7 @@ const TrendingMovie = () => {
                     >
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                             {topRatedMovies.map((topRated) => (
-                                <MovieCard key={topRated.id} movie={topRated} type={'movie'} />
+                                <MovieCard key={topRated.id} movie={topRated} />
                             ))}
                         </div>
                     </InfiniteScroll>

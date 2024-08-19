@@ -51,7 +51,7 @@ const BollywoodMovie = () => {
                         >
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                                 {bollywoodMovies.map((bollywood) => (
-                                    <MovieCard key={bollywood.id} movie={bollywood} type={'movie'} />
+                                    <MovieCard key={bollywood.id} movie={bollywood}/>
                                 ))}
                             </div>
                         </InfiniteScroll>

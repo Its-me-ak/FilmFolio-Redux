@@ -9,7 +9,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const SearchedMovies = () => {
     const dispatch = useDispatch();
-    const { searchMovies, loading, page, totalPage, query } = useSelector(state => state.searchedMovies);
+    const { searchMovies, loading, page, totalPage, query, } = useSelector(state => state.searchedMovies);
 
     useEffect(() => {
         if (query && page === 1) {
@@ -32,6 +32,7 @@ const SearchedMovies = () => {
     const filterSearchMovies = searchMovies.filter(searchMovie => searchMovie.poster_path)
 
 
+
     return (
         <>
             <div className="movies-container px-6 pb-10 pt-10">
@@ -46,8 +47,7 @@ const SearchedMovies = () => {
                     >
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                             {filterSearchMovies.map((searchMovie) => (
-                                <MovieCard key={searchMovie.id} movie={searchMovie} type={'movie'} />
-                            ))}
+                                <MovieCard key={searchMovie.id} movie={searchMovie} />))}
                         </div>
                     </InfiniteScroll>
                 )}

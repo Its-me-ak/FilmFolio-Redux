@@ -8,7 +8,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 
 export const fetchSearchMovies = createAsyncThunk(
     'movies/fetchSearchMovies',
-    async ({ searchQuery, page, clearResult }, {dispatch}) => {
+    async ({ searchQuery, page, clearResult, type }, {dispatch}) => {
         if(clearResult){
             dispatch(clearSearchResult());
         }
@@ -16,6 +16,7 @@ export const fetchSearchMovies = createAsyncThunk(
             // Fetch movies
             const movieResponse = await axios.get(`${BASE_URL}/search/movie`, {
                 params: {
+                    type,
                     api_key: API_KEY,
                     language: 'en-US',
                     query: searchQuery,
@@ -27,6 +28,7 @@ export const fetchSearchMovies = createAsyncThunk(
             // Fetch TV shows
             const tvResponse = await axios.get(`${BASE_URL}/search/tv`, {
                 params: {
+                    type,
                     api_key: API_KEY,
                     language: 'en-US',
                     query: searchQuery,
