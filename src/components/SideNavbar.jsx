@@ -8,6 +8,10 @@ import { CgClose } from "react-icons/cg";
 
 const SideNavbar = () => {
   const { isAuthenticated, loginWithPopup, logout, user } = useAuth0()
+  console.log(isAuthenticated);
+  console.log(user);
+  
+  
   const sidebarRef = useRef()
   const navigate = useNavigate()
   const NavData = [
@@ -36,15 +40,17 @@ const SideNavbar = () => {
   const handleLogout = async () => {
     try {
       await logout({ returnTo: window.location.origin });
-      toast.success('Logged out succesfully',
-        {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        }
-      )
+     setTimeout(() =>{
+       toast.success('Logged out succesfully',
+         {
+           style: {
+             borderRadius: '10px',
+             background: '#21263a',
+             color: '#fff',
+           },
+         }
+       )
+     }, 700)
 
     } catch (error) {
       toast.error('Logout failed',
@@ -63,27 +69,24 @@ const SideNavbar = () => {
     try {
       await loginWithPopup();
 
-      // Adding a short delay to allow isAuthenticated to update
-      setTimeout(() => {
-        if (isAuthenticated) {
-          toast.success('Logged in successfully', {
-            style: {
-              borderRadius: '10px',
-              background: '#21263a',
-              color: '#fff',
-            },
-          });
-        } else {
-          toast.error('Login canceled', {
-            style: {
-              borderRadius: '10px',
-              background: '#21263a',
-              color: '#fff',
-            },
-          });
-        }
-      }, 500); // Adjust the delay as needed
-
+      // Check if the user object is populated
+      if (user) {
+        toast.success('Logged in successfully', {
+          style: {
+            borderRadius: '10px',
+            background: '#21263a',
+            color: '#fff',
+          },
+        });
+      } else {
+        toast.error('Login canceled', {
+          style: {
+            borderRadius: '10px',
+            background: '#21263a',
+            color: '#fff',
+          },
+        });
+      }
     } catch (error) {
       console.error(error);
       toast.error('Login failed', {
