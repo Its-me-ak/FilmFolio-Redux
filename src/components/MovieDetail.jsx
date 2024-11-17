@@ -34,6 +34,7 @@ const MovieDetail = ({ type }) => {
 
     const filteredCasts = casts.filter(cast => cast.profile_path);
     const filteredCrews = crews.filter(crew => crew.profile_path);
+    
 
     // get the details data that is differnce in tv show and movie
     const movieTitle = movieDetails?.title || movieDetails?.name;
@@ -41,13 +42,13 @@ const MovieDetail = ({ type }) => {
 
     // Get video resolution based on video size
     const getVideoResolution = (video) => {
-        if (!video) return "HD"; // Default to HD if no video object
+        if (!video) return "HD";
         const { size } = video;
         if (size === 720) return "HD";
         if (size === 1080) return "UHD";
         if (size === 2160) return "4K";
         if (size === 1440) return "2K";
-        return "HD"; // Default to HD for unrecognized sizes
+        return "HD";
     };
 
     return (
@@ -202,7 +203,7 @@ const MovieDetail = ({ type }) => {
                             </div>
                         ))
                     }
-                </MovieSlider>
+                </MovieSlider>-
             </div>
 
             <div className="mt-985 py-4 px-3">
@@ -211,7 +212,8 @@ const MovieDetail = ({ type }) => {
                     {
                         filteredCrews.map((crew) => (
                             <div key={crew.id} className="border-none px-1 outline-none">
-                                <img src={`https://image.tmdb.org/t/p/original${crew.profile_path}`} alt={crew.profile_path} className="h-[300px] rounded-lg shadow-xl" />
+                                <img src={`https://image.tmdb.org/t/p/original${crew.profile_path}`} alt={crew.profile_path} className="h-[300px] rounded-lg shadow-xl" 
+                                onClick={() => navigate(`/person-details/${crew.id}`)} />
                                 <h5 className="font-semibold text-gray-100 capitalize mt-1">{crew.name}</h5>
                                 <p className="text-sm text-[#38ccd4] font-semibold">{crew.job}</p>
                             </div>

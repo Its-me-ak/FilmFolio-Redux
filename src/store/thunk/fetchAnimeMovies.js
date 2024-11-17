@@ -15,3 +15,5 @@ export const fetchAnimeMovies = createAsyncThunk(
         return response.data;
     }
 );
+console.dir(fetchAnimeMovies);
+

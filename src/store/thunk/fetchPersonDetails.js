@@ -27,7 +27,6 @@ export const fetchSocialLinks = createAsyncThunk(
     'person/fetchSocialLinks',
     async (id) => {
         const response = await axios.get(`${BASE_URL}/person/${id}/external_ids?api_key=${API_KEY}&language=en-US`);
-        console.log(response.data);
         return response.data;
     }
 );

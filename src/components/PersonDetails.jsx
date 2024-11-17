@@ -6,6 +6,8 @@ import { FaFacebookF, FaInstagram, FaXTwitter, FaYoutube } from "react-icons/fa6
 import { format, parseISO } from 'date-fns'
 import MovieSlider from "./MovieSlider";
 import Loader from "./Loader";
+import { TiArrowBack } from "react-icons/ti";
+
 
 const calculateAge = (birthDate) => {
     const today = new Date();
@@ -24,7 +26,7 @@ const PersonDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { personDetails, personSocialLinks, personMovieCredits, loading, creditLoading } = useSelector(state => state.personDetails)
-    console.log(creditLoading);
+
 
 
     useEffect(() => {
@@ -51,7 +53,12 @@ const PersonDetails = () => {
         <>
             {loading ? (<Loader />) : (
                 <div className="w-full grid grid-cols-[1fr] md:grid-cols-[1fr_3fr] gap-4 py-5 px-5">
-                    <div>
+                    <div className="absolute top-2 left-3 z-30">
+                        <button className="backdrop-blur-sm bg-white/30 p-3 text-2xl text-white font-medium rounded-full" onClick={() => navigate(-1)}>
+                            <TiArrowBack />
+                        </button>
+                    </div>
+                    <div className="mt-12">
                         <img src={`https://image.tmdb.org/t/p/w500${personDetails.profile_path}`} alt="" />
                         <ul className="mt-5 flex justify-center items-center gap-4">
                             <li className="text-xl text-gray-300 hover:text-[#38ccd4] transition-all duration-300">
@@ -112,7 +119,7 @@ const PersonDetails = () => {
 
 
                     </div>
-                    <div className="overflow-hidden">
+                    <div className="overflow-hidden mt-10">
                         <h1 className="text-3xl font-bold text-gray-200 mb-2">{personDetails.name}</h1>
                         <p className="text-gray-400">
                             {isExpand ? personDetails?.biography : croppedBiographyWord(personDetails?.biography)}
@@ -150,6 +157,7 @@ const PersonDetails = () => {
                             )}
                         </div>
 
+
                         <div>
                             <h2 className="font-bold text-lg capitalize text-gray-300 mb-3 md:text-left text-center">Acting Credits</h2>
                             {creditLoading ? (
@@ -185,6 +193,7 @@ const PersonDetails = () => {
                                 )
                             }
                         </div>
+
                     </div>
                 </div>
             )}
