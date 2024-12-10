@@ -1,15 +1,20 @@
 import { useContext, useEffect, useRef } from "react"
 import { MovieContext } from "../context/MovieContext"
 import { Link, useNavigate } from "react-router-dom"
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
+// import {useUser, useSignIn, useSignUp} from '@clerk/clerk-react'
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from '@clerk/clerk-react';
 import toast from "react-hot-toast";
 import { CgClose } from "react-icons/cg";
 
 
 const SideNavbar = () => {
-  const { isAuthenticated, loginWithPopup, logout, user, getAccessTokenSilently } = useAuth0()
-  console.log( "This is isAuthenticated",isAuthenticated);
-  console.log("This is user",user);
+  // const { isAuthenticated, loginWithPopup, logout, user, getAccessTokenSilently } = useAuth0()
+  const { user } = useUser();
+  // const { signOut } = useSignUp();
+  // const { signIn } = useSignIn();
+  console.log(user);
+  
   
   
   const sidebarRef = useRef()
@@ -37,66 +42,51 @@ const SideNavbar = () => {
     setMobileMenu(false)
   }
 
-  const handleLogout = async () => {
-    try {
-      await logout({ returnTo: window.location.origin });
-       toast.success('Logged out succesfully',
-         {
-           style: {
-             borderRadius: '10px',
-             background: '#21263a',
-             color: '#fff',
-           },
-         }
-       )
-    } catch (error) {
-      toast.error('Logout failed',
-        {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        }
-      );
-    }
-  }
+  // const handleLogout = async () => {
+  //   try {
+  //     await signOut();
+  //      toast.success('Logged out succesfully',
+  //        {
+  //          style: {
+  //            borderRadius: '10px',
+  //            background: '#21263a',
+  //            color: '#fff',
+  //          },
+  //        }
+  //      )
+  //   } catch (error) {
+  //     toast.error('Logout failed',
+  //       {
+  //         style: {
+  //           borderRadius: '10px',
+  //           background: '#21263a',
+  //           color: '#fff',
+  //         },
+  //       }
+  //     );
+  //   }
+  // }
 
-  const handleLogin = async () => {
-    try {
-      await loginWithPopup();
-
-      // Try to get the access token to confirm if the user is authenticated
-      try {
-        await getAccessTokenSilently();
-        toast.success('Logged in successfully', {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        });
-      } catch (error) {
-        toast.error('Login cancelled', {
-          style: {
-            borderRadius: '10px',
-            background: '#21263a',
-            color: '#fff',
-          },
-        });
-      }
-
-    } catch (error) {
-      console.error(error);
-      toast.error('Login failed', {
-        style: {
-          borderRadius: '10px',
-          background: '#21263a',
-          color: '#fff',
-        },
-      });
-    }
-  };
+  // const handleLogin = async () => {
+  //   try {
+  //     await signIn.create();
+  //     toast.success('Logged in successfully', {
+  //       style: {
+  //         borderRadius: '10px',
+  //         background: '#21263a',
+  //         color: '#fff',
+  //       },
+  //     });
+  //   } catch (error) {
+  //     toast.error('Login failed', {
+  //       style: {
+  //         borderRadius: '10px',
+  //         background: '#21263a',
+  //         color: '#fff',
+  //       },
+  //     });
+  //   }
+  // };
 
 
   useEffect(() => {
@@ -145,8 +135,8 @@ const SideNavbar = () => {
           ))}
         </ul>
         <div className="absolute bottom-2 mx-4">
-          {
-            isAuthenticated && user && (
+          {/* {
+            isSignedIn && user && (
               <button className="flex items-center justify-between gap-2 font-semibold text-lg bg-[#455e94] shadow-md border-2 py-[6px] px-4 rounded-lg text-gray-100 border-[#38ccd4] mb-2">
                 <img src={user?.picture} alt={user.name} className="w-8 h-8" />
 
@@ -154,11 +144,31 @@ const SideNavbar = () => {
               </button>
             )
           }
-          {isAuthenticated ? (
+          {isSignedIn ? (
             <button className="font-semibold text-lg bg-[#455e94] shadow-md border-2 py-1 rounded-lg px-14 text-gray-100 border-[#38ccd4]" onClick={handleLogout}>Logout</button>
           ) : (
             <button className="font-semibold text-lg bg-[#455e94] shadow-md border-2 py-1 rounded-lg px-[60px] text-gray-100 border-[#38ccd4]" onClick={handleLogin}>Login</button>
-          )}
+          )} */}
+          {/* Clerk Authentication Buttons */}
+          <SignedOut>
+            <SignInButton 
+              className="font-semibold text-lg bg-[#455e94] shadow-md border-2 py-1 rounded-lg px-[57px] text-gray-100 border-[#38ccd4]"
+            />
+          </SignedOut>
+          <SignedIn>
+            <div className="flex items-center justify-between gap-2 font-semibold text-lg bg-[#455e94] shadow-md border-2 py-[6px] px-4 rounded-lg text-gray-100 border-[#38ccd4] mb-2">
+              <UserButton />
+              {user && (
+                <>
+                  {/* User Name */}
+                  <span className="text-gray-100 font-semibold text-lg">
+                    {user.fullName || "User"}
+                  </span>
+                </>
+              )}
+              {/* User Button for Dropdown Actions */}
+            </div>
+          </SignedIn>
         </div>
       </nav>
     </div>

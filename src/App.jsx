@@ -17,6 +17,7 @@ import { Toaster } from 'react-hot-toast';
 import MyCollection from './components/MyCollection';
 import PersonDetails from './components/PersonDetails';
 import TvShows from './components/TvShows';
+import SignInPage from './components/auth/SignInPage';
 
 const App = () => {
   const isMovieDetail = useMatch('/movie-details/:id');
@@ -26,6 +27,7 @@ const App = () => {
   return (
     <MovieProvider>
       <Toaster/>
+      
       <SideNavbar />
       <div className='md:ml-[13rem] relative'>
         {
@@ -34,9 +36,11 @@ const App = () => {
               <Header />
               <SearchBar />
             </div>
+            
           )
         }
         <Routes>
+          <Route path="/sign-in" element={<SignInPage/>} />
           <Route path='/' element={<BodyContainer />} />
           <Route path='/trending' element={<TrendingMovie />} />
           <Route path='/popular' element={<PopularMovie />} />

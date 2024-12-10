@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom"
 import { FaRegStar, FaStar } from "react-icons/fa";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
+import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const MovieCard = ({ movie, type }) => {
-  const { user } = useAuth0()
+  const { user } = useUser()
   const [isMovieBookmarked, setIsMovieBookmarked] = useState(null)
   const navigate = useNavigate()
 
