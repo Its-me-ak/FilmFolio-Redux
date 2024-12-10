@@ -18,6 +18,7 @@ import MyCollection from './components/MyCollection';
 import PersonDetails from './components/PersonDetails';
 import TvShows from './components/TvShows';
 import SignInPage from './components/auth/SignInPage';
+import SignUpPage from './components/auth/SignUpPage';
 
 const App = () => {
   const isMovieDetail = useMatch('/movie-details/:id');
@@ -41,6 +42,7 @@ const App = () => {
         }
         <Routes>
           <Route path="/sign-in" element={<SignInPage/>} />
+          <Route path="/sign-up" element={<SignUpPage/>} />
           <Route path='/' element={<BodyContainer />} />
           <Route path='/trending' element={<TrendingMovie />} />
           <Route path='/popular' element={<PopularMovie />} />
