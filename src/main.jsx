@@ -3,8 +3,8 @@ import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 // import { Auth0Provider } from '@auth0/auth0-react'
-import {ClerkProvider} from '@clerk/clerk-react'
-import {dark} from '@clerk/themes'
+import { ClerkProvider } from '@clerk/clerk-react'
+import { dark } from '@clerk/themes'
 import { Provider } from 'react-redux'
 import { store } from './store/store.js'
 
@@ -22,20 +22,20 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   //   }}
   // >
   <ClerkProvider
-  publishableKey={PUBLISHABLE_KEY}
-  appearance={{
-    baseTheme: dark,
-    variables:{
-      colorPrimary:'#455e94',
-      fontSize: '16px'
-    }
-  }}
+    publishableKey={PUBLISHABLE_KEY}
+    appearance={{
+      baseTheme: dark,
+      variables: {
+        colorPrimary: '#455e94',
+        fontSize: '16px'
+      }
+    }}
   >
     <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>
-    </ClerkProvider>
+  </ClerkProvider>
   // </Auth0Provider>
 )

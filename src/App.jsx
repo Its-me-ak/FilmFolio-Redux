@@ -24,25 +24,28 @@ const App = () => {
   const isMovieDetail = useMatch('/movie-details/:id');
   const isPersonDetails = useMatch('/person-details/:id');
   const isTvDetails = useMatch('/tv-details/:id');
+  const isSignIn = useMatch('/hip-minnow-44.accounts.dev/sign-in')
+  const isSignUp = useMatch('/hip-minnow-44.accounts.dev/sign-up')
+
 
   return (
     <MovieProvider>
-      <Toaster/>
-      
+      <Toaster />
+
       <SideNavbar />
       <div className='md:ml-[13rem] relative'>
         {
-          !isMovieDetail && !isPersonDetails && !isTvDetails && (
+          !isMovieDetail && !isPersonDetails && !isTvDetails && isSignIn && isSignUp && (
             <div className='flex justify-between px-6 pt-2'>
               <Header />
               <SearchBar />
             </div>
-            
+
           )
         }
         <Routes>
-          <Route path="/sign-in" element={<SignInPage/>} />
-          <Route path="/sign-up" element={<SignUpPage/>} />
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
           <Route path='/' element={<BodyContainer />} />
           <Route path='/trending' element={<TrendingMovie />} />
           <Route path='/popular' element={<PopularMovie />} />
@@ -50,13 +53,13 @@ const App = () => {
           <Route path='/bollywood' element={<BollywoodMovie />} />
           <Route path='/anime' element={<Anime />} />
           <Route path='/upcoming' element={<UpcomingMovie />} />
-          <Route path='/search/:query' element={<MovieWrapper/>} />
+          <Route path='/search/:query' element={<MovieWrapper />} />
           <Route path='/search' element={<MovieWrapper />} />
           <Route path='/movie-details/:id' element={<MovieDetail type={'movie'} />} />
           <Route path='/tv-details/:id' element={<MovieDetail type={'tv'} />} />
-          <Route path='/person-details/:id' element= {<PersonDetails/>} />
-          <Route path='/bookmarked-movie' element={<MyCollection/>} />
-          <Route path='/tv-show' element={<TvShows/>} />
+          <Route path='/person-details/:id' element={<PersonDetails />} />
+          <Route path='/bookmarked-movie' element={<MyCollection />} />
+          <Route path='/tv-show' element={<TvShows />} />
         </Routes>
       </div>
     </MovieProvider>

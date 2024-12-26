@@ -155,18 +155,17 @@ const SideNavbar = () => {
               className="font-semibold text-lg bg-[#455e94] shadow-md border-2 py-1 rounded-lg px-[57px] text-gray-100 border-[#38ccd4]"
             />
           </SignedOut>
-          <SignedIn>
+          <SignedIn
+          >
             <div className="flex items-center justify-between gap-2 font-semibold text-lg bg-[#455e94] shadow-md border-2 py-[6px] px-4 rounded-lg text-gray-100 border-[#38ccd4] mb-2">
               <UserButton />
               {user && (
                 <>
-                  {/* User Name */}
                   <span className="text-gray-100 font-semibold text-lg">
                     {user.fullName || "User"}
                   </span>
                 </>
               )}
-              {/* User Button for Dropdown Actions */}
             </div>
           </SignedIn>
         </div>

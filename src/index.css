@@ -22,3 +22,28 @@ background-image: linear-gradient(72.1deg, rgba(31, 30, 48, 1) 1.7%, rgba(58, 74
     background: #38ccd4;
     border-radius: 10px;
 }
+
+/* Clerk Customization css */
+.cl-internal-o8d3u7[data-variant="solid"], .cl-internal-14fg9yx[data-variant="solid"] {
+    border-width: 1px;
+}
+
+.cl-internal-o8d3u7, .cl-internal-14fg9yx  {
+    background-color: #455e94 ;
+    color: #fff;
+    border: 1px solid #38ccd4;
+} 
+
+.cl-footer, .cl-internal-1foj88f {
+    background-color: #21263a;
+}
+.cl-internal-w4f4gh, .cl-internal-19lj6gi {
+    background: #21263a;
+}
+.cl-internal-1owsakc, .cl-internal-1jtxtl4{
+    color: #455e94;
+}
+.cl-internal-piyvrh {
+    background: none;
+}
+
