@@ -17,6 +17,7 @@ import PersonDetails from './components/PersonDetails';
 import TvShows from './components/TvShows';
 import SignInPage from './components/auth/SignInPage';
 import SignUpPage from './components/auth/SignUpPage';
+import { Toaster } from 'react-hot-toast';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
 
   return (
     <MovieProvider>
+      <Toaster/>
       <SideNavbar />
       <div className='md:ml-[13rem] relative'>
         {
