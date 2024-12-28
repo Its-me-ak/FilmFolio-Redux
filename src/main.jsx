@@ -7,6 +7,8 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import { dark } from '@clerk/themes'
 import { Provider } from 'react-redux'
 import { store } from './store/store.js'
+import toast from "react-hot-toast";
+
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 if (!PUBLISHABLE_KEY) {

@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom"
 // import { useAuth0 } from "@auth0/auth0-react";
 // import {useUser, useSignIn, useSignUp} from '@clerk/clerk-react'
 import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from '@clerk/clerk-react';
-import toast from "react-hot-toast";
 import { CgClose } from "react-icons/cg";
 
 
@@ -110,7 +109,7 @@ const SideNavbar = () => {
   };
 
   return (
-    <div ref={sidebarRef} className={`block md:fixed md:w-52 h-full bg-[#21263a] absolute w-52 z-30 md:translate-x-0 transition-all ${mobileMenu ? "translate-x-0" : "translate-x-[-240px]"}`}>
+    <div ref={sidebarRef} className={`block md:fixed md:w-52 h-full bg-[#21263a] fixed w-52 z-30 md:translate-x-0 transition-all ${mobileMenu ? "translate-x-0" : "translate-x-[-240px]"}`}>
       <span className="mt-2 flex justify-end me-2 text-white text-xl md:hidden p-1">
         <CgClose className="cursor-pointer" onClick={MobileMenuHide} />
       </span>

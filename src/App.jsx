@@ -24,8 +24,8 @@ const App = () => {
   const isMovieDetail = useMatch('/movie-details/:id');
   const isPersonDetails = useMatch('/person-details/:id');
   const isTvDetails = useMatch('/tv-details/:id');
-  const isSignIn = useMatch('/hip-minnow-44.accounts.dev/sign-in')
-  const isSignUp = useMatch('/hip-minnow-44.accounts.dev/sign-up')
+  // const isSignIn = useMatch('/hip-minnow-44.accounts.dev/sign-in')
+  // const isSignUp = useMatch('/hip-minnow-44.accounts.dev/sign-up')
 
 
   return (
@@ -35,7 +35,7 @@ const App = () => {
       <SideNavbar />
       <div className='md:ml-[13rem] relative'>
         {
-          !isMovieDetail && !isPersonDetails && !isTvDetails && isSignIn && isSignUp && (
+          !isMovieDetail && !isPersonDetails && !isTvDetails && (
             <div className='flex justify-between px-6 pt-2'>
               <Header />
               <SearchBar />
