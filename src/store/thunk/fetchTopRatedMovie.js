@@ -1,8 +1,7 @@
-// src/features/movie/thunks/filteredGenreThunk.js
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_KEY = '7643d669824a042f46cc3ac52a98852a';
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 
