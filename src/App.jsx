@@ -1,4 +1,4 @@
-
+import { useEffect } from 'react';
 import { Routes, Route, useMatch } from 'react-router-dom';
 import SideNavbar from './components/SideNavbar';
 import { MovieProvider } from './context/MovieContext';
@@ -19,19 +19,39 @@ import PersonDetails from './components/PersonDetails';
 import TvShows from './components/TvShows';
 import SignInPage from './components/auth/SignInPage';
 import SignUpPage from './components/auth/SignUpPage';
+import toast from 'react-hot-toast';
+import { useUser } from '@clerk/clerk-react';
+
 
 const App = () => {
   const isMovieDetail = useMatch('/movie-details/:id');
   const isPersonDetails = useMatch('/person-details/:id');
   const isTvDetails = useMatch('/tv-details/:id');
-  // const isSignIn = useMatch('/hip-minnow-44.accounts.dev/sign-in')
-  // const isSignUp = useMatch('/hip-minnow-44.accounts.dev/sign-up')
 
+  const { user, isSignedIn, } = useUser()
+
+  useEffect(() => {
+    if (isSignedIn && user) {
+      const isRecentlyCreated =
+        new Date() - new Date(user.createdAt) < 60 * 1000; // Check if the account was created within the last minute
+
+      if (isRecentlyCreated) {
+        toast.success('You have successfully signed up!', {
+          duration: 4000,
+          position: 'top-center',
+        });
+      } else {
+        toast.success('You have successfully logged in!', {
+          duration: 4000,
+          position: 'top-center',
+        });
+      }
+    }
+  }, [isSignedIn, user]);
 
   return (
     <MovieProvider>
       <Toaster />
-
       <SideNavbar />
       <div className='md:ml-[13rem] relative'>
         {
