@@ -10,6 +10,7 @@ import { store } from './store/store.js'
 
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+console.log("Publishable Key in Production:", import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key")
 }
