@@ -1,5 +1,4 @@
 import { SignUp } from '@clerk/clerk-react'
-import React from 'react'
 
 const SignUpPage = () => {
   const customAppearance = {
@@ -14,6 +13,7 @@ const SignUpPage = () => {
       <div className='flex justify-center h-svh items-center'>
           <SignUp appearance={customAppearance} />
       </div>
+
   )
 }
 
